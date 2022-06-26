@@ -22,8 +22,10 @@ function drawImage() {
       const green = pixels.data[(y * 4 * pixels.width) + (x * 4 + 1)];
       const blue = pixels.data[(y * 4 * pixels.width) + (x * 4 + 2)];
       const brightness = calculateRelativeBrightness(red, green, blue);
+      const cellColor = `rgb(${red}, ${green}, ${blue}`;
       const cell = [
         brightness,
+        cellColor
       ];
       row.push(cell);
     }
@@ -65,7 +67,7 @@ function drawImage() {
 
     draw() {
       ctx.beginPath();
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = mappedImage[this.position1][this.position2][1];
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
     }
