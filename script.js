@@ -59,7 +59,7 @@ function drawImage() {
       let movement = (2.5 - this.speed) + this.velocity;
 
       this.y += movement;
-      this.x += movement;
+      // this.x += movement;
 
       if (this.y >= canvas.height) {
         this.y = 0;
@@ -74,6 +74,7 @@ function drawImage() {
 
     draw() {
       ctx.beginPath();
+      // ctx.fillStyle = 'red';
       ctx.fillStyle = mappedImage[this.position1][this.position2][1];
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
