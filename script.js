@@ -59,9 +59,16 @@ function drawImage() {
       let movement = (2.5 - this.speed) + this.velocity;
 
       this.y += movement;
+      this.x += movement;
+
       if (this.y >= canvas.height) {
         this.y = 0;
         this.x = Math.random() * canvas.width;
+      }
+
+      if (this.x >= canvas.width) {
+        this.x = 0;
+        this.y = Math.random() * canvas.height;
       }
     }
 
