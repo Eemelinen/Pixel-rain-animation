@@ -7,12 +7,12 @@ const numberOfParticles = 5000;
 function drawImage() {
 
   const canvas = document.getElementById('canvas1');
-  const ctx = canvas.getContext('2d');
+  const context = canvas.getContext('2d');
   canvas.width = 570;
   canvas.height = 697;
-  ctx.drawImage(myImage, 0, 0, canvas.width, canvas.height);
-  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(myImage, 0, 0, canvas.width, canvas.height);
+  const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
   let mappedImage = [];
   for (let y = 0; y < canvas.height; y++) {
@@ -41,63 +41,23 @@ function drawImage() {
     ) / 100;
   }
 
-  class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = 0;
-      this.speed = 0;
-      this.velocity = Math.random() * 0.5;
-      this.size = Math.random() * 1.5 + 1;
-      this.position1 = Math.floor(this.y);
-      this.position2 = Math.floor(this.x);
-    }
-
-    update() {
-      this.position1 = Math.floor(this.y);
-      this.position2 = Math.floor(this.x);
-      this.speed = mappedImage[this.position1][this.position2][0];
-      let movement = (2.5 - this.speed) + this.velocity;
-
-      this.y += movement;
-      // this.x += movement;
-
-      if (this.y >= canvas.height) {
-        this.y = 0;
-        this.x = Math.random() * canvas.width;
-      }
-
-      if (this.x >= canvas.width) {
-        this.x = 0;
-        this.y = Math.random() * canvas.height;
-      }
-    }
-
-    draw() {
-      ctx.beginPath();
-      // ctx.fillStyle = 'red';
-      ctx.fillStyle = mappedImage[this.position1][this.position2][1];
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
   function initParticles() {
     for (let i = 0; i < numberOfParticles; i++) {
-      particlesArray.push(new Particle)
+      particlesArray.push(new Particle(canvas, mappedImage, context))
     }
   }
 
   initParticles();
 
   function animate() {
-    ctx.globalAlpha = 0.05;
-    ctx.fillStyle = 'rgb(0, 0, 0)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.globalAlpha = 0.2;
+    context.globalAlpha = 0.05;
+    context.fillStyle = 'rgb(0, 0, 0)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.globalAlpha = 0.2;
 
     for (let i = 0; i < particlesArray.length; i++) {
       particlesArray[i].update();
-      ctx.globalAlpha = particlesArray[i].speed * 0.5;
+      context.globalAlpha = particlesArray[i].speed * 0.5;
       particlesArray[i].draw();
     }
     requestAnimationFrame(animate);
