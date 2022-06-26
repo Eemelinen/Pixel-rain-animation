@@ -9,8 +9,8 @@ function drawImage() {
 
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
-  canvas.width = 334;
-  canvas.height = 376;
+  canvas.width = 570;
+  canvas.height = 697;
   ctx.drawImage(myImage, 0, 0, canvas.width, canvas.height);
 
   class Particle {
