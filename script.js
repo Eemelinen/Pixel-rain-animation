@@ -2,7 +2,7 @@ const myImage = new Image();
 myImage.src = stringifiedImage;
 
 let particlesArray = [];
-const numberOfParticles = 5000;
+const numberOfParticles = 8000;
 
 function drawImage() {
 
